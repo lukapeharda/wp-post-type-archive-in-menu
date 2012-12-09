@@ -154,7 +154,7 @@ function makeItemCurrentInMenu($items)
                  $items[$key]->current_item_parent = true;
             }
 
-            if (in_array(intval($parent->db_id), $active_ancestor_item_ids)) {
+            if (in_array(intval($parent->db_id), $activeAncestors)) {
                  $classes[] = 'current-menu-ancestor';
                  $items[$key]->current_item_ancestor = true;
             }

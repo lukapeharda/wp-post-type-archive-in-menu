@@ -4,7 +4,7 @@
 Plugin Name: Post type archive in menu
 Plugin URI: http://lukapeharda.com
 Description: Add post type (custom) archive links easily through WP builtin menu system
-Version: 1.0.0
+Version: 1.0.1
 Author: Luka Peharda
 Author URI: http://lukapeharda.com
 License: GPLv2 or later
@@ -61,7 +61,10 @@ function addPostTypeArchivesMenu()
 					<input type="hidden" class="menu-item-classes" name="menu-item[-<?php echo $a; ?>][menu-item-classes]" value="post-type-archive-<?php echo $postType; ?>" />
 				</li>
 			<?php $a = $a + 1; endforeach; ?>
-			</ul>
+			<?php if ($a === 1000) : ?>
+				<li><?php _e('No results found.'); ?></li>
+			<?php endif; ?>
+			</ul>			
 		</div>
 
 		<p class="button-controls">
@@ -69,8 +72,7 @@ function addPostTypeArchivesMenu()
 				<a href="<?php echo esc_url(add_query_arg(array('archives-metabox-tab' => 'all', 'selectall' => 1), remove_query_arg($removed_args))); ?>#archives-metabox" class="select-all"><?php _e('Select All'); ?></a>
 			</span>
 			<span class="add-to-menu">
-				<img class="waiting" src="<?php echo esc_url(admin_url('images/wpspin_light.gif')); ?>" alt="" />
-				<input type="submit"<?php disabled( $nav_menu_selected_id, 0); ?> class="button-secondary submit-add-to-menu" value="<?php esc_attr_e('Add to Menu'); ?>" name="add-post-type-menu-item" id="submit-archives-metabox" />
+				<input type="submit" class="button-secondary submit-add-to-menu" value="<?php esc_attr_e('Add to Menu'); ?>" name="add-post-type-menu-item" id="submit-archives-metabox" />
 			</span>
 		</p>
 
